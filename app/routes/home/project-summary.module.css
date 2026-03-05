@@ -76,13 +76,14 @@
 }
 
 .preview {
-  position: relative;
   display: flex;
   align-items: center;
   justify-self: center;
   justify-content: center;
   height: 100%;
   width: 100%;
+  position: relative;
+    left: -60px;
 }
 
 .model {

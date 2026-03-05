@@ -59,4 +59,9 @@
     "width": 24,
     "height": 24
   }
+    ,
+  "me-logo": {
+    "width": 32,
+    "height": 32
+  }
 }

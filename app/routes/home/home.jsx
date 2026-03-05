@@ -1,15 +1,7 @@
-import gamestackTexture2Large from '~/assets/gamestack-list-large.jpg';
-import gamestackTexture2Placeholder from '~/assets/gamestack-list-placeholder.jpg';
-import gamestackTexture2 from '~/assets/gamestack-list.jpg';
-import gamestackTextureLarge from '~/assets/gamestack-login-large.jpg';
-import gamestackTexturePlaceholder from '~/assets/gamestack-login-placeholder.jpg';
-import gamestackTexture from '~/assets/gamestack-login.jpg';
-import sliceTextureLarge from '~/assets/slice-app-large.jpg';
-import sliceTexturePlaceholder from '~/assets/slice-app-placeholder.jpg';
-import sliceTexture from '~/assets/slice-app.jpg';
-import sprTextureLarge from '~/assets/spr-lesson-builder-dark-large.jpg';
-import sprTexturePlaceholder from '~/assets/spr-lesson-builder-dark-placeholder.jpg';
-import sprTexture from '~/assets/spr-lesson-builder-dark.jpg';
+
+import myProjectScreenshot from '~/assets/my_project_screenshot.png';
+import myProjectScreenshotLarge from '~/assets/my_project_screenshot2.png';
+ import myProjectScreenshotPlaceholder from '~/assets/my_project_screenshot3.png';
 import { Footer } from '~/components/footer';
 import { baseMeta } from '~/utils/meta';
 import { Intro } from './intro';
@@ -103,8 +95,8 @@ export const Home = () => {
         sectionRef={projectOne}
         visible={visibleSections.includes(projectOne.current)}
         index={1}
-        title="Designing the future of education"
-        description="Designing a platform to help educators build better online courseware"
+        title="Building data warehouse with sql-server"
+        description="Multi-layer Bronze / Silver / Gold data warehouse built in SQL Server. Raw ingestion with full fidelity, transformation with business rules, and BI-ready Gold views for Power BI dashboards."
         buttonText="View project"
         buttonLink="/projects/smart-sparrow"
         model={{
@@ -112,8 +104,8 @@ export const Home = () => {
           alt: 'Smart Sparrow lesson builder',
           textures: [
             {
-              srcSet: `${sprTexture} 1280w, ${sprTextureLarge} 2560w`,
-              placeholder: sprTexturePlaceholder,
+              srcSet: `${myProjectScreenshot} 1280w, ${myProjectScreenshot} 2560w`,
+              placeholder: myProjectScreenshot,
             },
           ],
         }}
@@ -124,21 +116,17 @@ export const Home = () => {
         sectionRef={projectTwo}
         visible={visibleSections.includes(projectTwo.current)}
         index={2}
-        title="Video game progress tracking"
-        description="Design and development for a video game tracking app built in React Native"
-        buttonText="View website"
-        buttonLink="https://gamestack.hamishw.com"
+        title="price tracking & analytics web application"
+        description="Design and development for price tracking webapp built with React, flask , and sql-server. Implemented features for tracking price changes, setting alerts, and visualizing price history."
+        buttonText="View project"
+        buttonLink=""
         model={{
-          type: 'phone',
-          alt: 'App login screen',
+          type: 'laptop',
+          alt: 'Smart Sparrow lesson builder',
           textures: [
             {
-              srcSet: `${gamestackTexture} 375w, ${gamestackTextureLarge} 750w`,
-              placeholder: gamestackTexturePlaceholder,
-            },
-            {
-              srcSet: `${gamestackTexture2} 375w, ${gamestackTexture2Large} 750w`,
-              placeholder: gamestackTexture2Placeholder,
+              srcSet: `${myProjectScreenshotLarge} 1280w, ${myProjectScreenshotLarge} 2560w`,
+              placeholder: myProjectScreenshotLarge,
             },
           ],
         }}
@@ -148,8 +136,8 @@ export const Home = () => {
         sectionRef={projectThree}
         visible={visibleSections.includes(projectThree.current)}
         index={3}
-        title="Biomedical image collaboration"
-        description="Increasing the amount of collaboration in Slice, an app for biomedical imaging"
+        title="bookstore sales analytics dashboard"
+        description="Design and development for a bookstore sales analytics dashboard built with python , sql-server and Power BI. Implemented features for visualizing sales trends, customer behavior, and inventory management."
         buttonText="View project"
         buttonLink="/projects/slice"
         model={{
@@ -157,8 +145,8 @@ export const Home = () => {
           alt: 'Annotating a biomedical image in the Slice app',
           textures: [
             {
-              srcSet: `${sliceTexture} 800w, ${sliceTextureLarge} 1920w`,
-              placeholder: sliceTexturePlaceholder,
+              srcSet: `${myProjectScreenshotPlaceholder} 800w, ${myProjectScreenshotPlaceholder} 1920w`,
+              placeholder: myProjectScreenshotPlaceholder,
             },
           ],
         }}

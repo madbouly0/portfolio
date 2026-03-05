@@ -21,16 +21,14 @@ const ProfileText = ({ visible, titleId }) => (
       <DecoderText text="Hi there" start={visible} delay={500} />
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      I’m Hamish, currently I live in Sydney working as a senior product designer at{' '}
-      <Link href="https://www.qwilr.com">Qwilr</Link>. My projects include UX design, UI
-      animations, and icon illustration. Being comfortable with code allows me to rapidly
-      prototype and validate experiences. If you’re interested in the tools and software I
-      use check out my <Link href="/uses">uses page</Link>.
+      I'm Mahmoud Madbouly, My journey began with an early passion for mathematics and logic, which evolved into a deep love for computer science. As a data engineer, I find joy in engineering the journey of information — from the moment it's generated in devices and systems, to its arrival as precise statistical analysis. I have a sharp awareness of the risks of decisions built on flawed data, which always drives me to use critical thinking and generate multiple ideas to build robust Data Pipelines that merge machine intelligence with logical analysis — to confidently advance company systems.{' '}
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
-      In my spare time I like to practice Brazilian Jiu Jitsu, play video games, and{' '}
-      <Link href="/projects/volkihar-knight">make mods</Link>. I’m always down for hearing
-      about new projects, so feel free to drop me a line.
+      connect on  <Link href="https://www.linkedin.com/in/mahmoudmadbouly/">linkedin</Link>. My projects include ETL pipelines, data visualization , Dashboards and web applications . Being comfortable with code allows me to rapidly
+      prototype and validate experiences.
+    </Text>
+     <Text className={styles.description} data-visible={visible} size="l" as="p">
+     feel free to contact on  mmadbouly00@gmail.com or whatsapp 01553155928 for collaborations.
     </Text>
   </Fragment>
 );

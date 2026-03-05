@@ -1,7 +1,7 @@
 import notFoundPoster from '~/assets/notfound.jpg';
-import notFoundVideo from '~/assets/notfound.mp4';
-import flatlinePoster from '~/assets/flatline.png';
-import flatlineVideo from '~/assets/flatline.mp4';
+import notFoundVideo from '~/assets/notfound.jpg';
+import flatlinePoster from '~/assets/notfound.jpg'
+import flatlineVideo from '~/assets/notfound.jpg'
 import { Button } from '~/components/button';
 import { DecoderText } from '~/components/decoder-text';
 import { Heading } from '~/components/heading';
@@ -133,27 +133,7 @@ export function Error({ error }) {
                 src={flatlined ? flatlineVideo : notFoundVideo}
                 placeholder={flatlined ? flatlinePoster : notFoundPoster}
               />
-              {flatlined ? (
-                <a
-                  className={styles.credit}
-                  data-visible={visible}
-                  href="https://www.imdb.com/title/tt0318871/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Animation from Berserk (1997)
-                </a>
-              ) : (
-                <a
-                  className={styles.credit}
-                  data-visible={visible}
-                  href="https://www.imdb.com/title/tt0113568/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Animation from Ghost in the Shell (1995)
-                </a>
-              )}
+              
             </div>
           </>
         )}
