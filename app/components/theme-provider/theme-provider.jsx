@@ -12,11 +12,10 @@ import { themes, tokens } from './theme';
 export const ThemeContext = createContext({});
 
 export const ThemeProvider = ({
-  theme = 'dark',
+  theme = 'light',
   children,
   className,
   as: Component = 'div',
-  toggleTheme,
   ...rest
 }) => {
   const parentTheme = useTheme();
@@ -26,7 +25,6 @@ export const ThemeProvider = ({
     <ThemeContext.Provider
       value={{
         theme,
-        toggleTheme: toggleTheme || parentTheme.toggleTheme,
       }}
     >
       {isRootProvider && children}

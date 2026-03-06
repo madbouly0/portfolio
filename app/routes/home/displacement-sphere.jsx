@@ -94,8 +94,10 @@ export const DisplacementSphere = props => {
   }, []);
 
   useEffect(() => {
-    const dirLight = new DirectionalLight(0xffffff, theme === 'light' ? 1.8 : 2.0);
-    const ambientLight = new AmbientLight(0xffffff, theme === 'light' ? 2.7 : 0.4);
+    // Toned down the light theme intensities so the sphere doesn't blow out
+    // and become invisible against the white background.
+    const dirLight = new DirectionalLight(0xffffff, theme === 'light' ? 1.2 : 2.0);
+    const ambientLight = new AmbientLight(0xffffff, theme === 'light' ? 0.8 : 0.4);
 
     dirLight.position.z = 200;
     dirLight.position.x = 100;
