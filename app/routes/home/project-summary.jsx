@@ -7,15 +7,12 @@ import { Text } from '~/components/text';
 import { useTheme } from '~/components/theme-provider';
 import { Transition } from '~/components/transition';
 import { useWindowSize } from '~/hooks';
-import { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy, useState, useEffect } from 'react';
 import { cssProps, media } from '~/utils/style';
 import { useHydrated } from '~/hooks/useHydrated';
+import { StaticLaptop } from '~/components/static-laptop/static-laptop';
 import katakana from './katakana.svg';
 import styles from './project-summary.module.css';
-
-const Model = lazy(() =>
-  import('~/components/model').then(module => ({ default: module.Model }))
-);
 
 export function ProjectSummary({
   id,
@@ -41,9 +38,9 @@ export function ProjectSummary({
   const indexText = index < 10 ? `0${index}` : index;
   const laptopSizes = `(max-width: ${media.tablet}px) 80vw, 40vw`;
 
-  function handleModelLoad() {
+  useEffect(() => {
     setModelLoaded(true);
-  }
+  }, []);
 
   function renderKatakana(device, visible) {
     return (
@@ -101,28 +98,7 @@ export function ProjectSummary({
       <div className={styles.preview}>
         {renderKatakana('laptop', visible)}
         <div className={styles.model} data-device="laptop">
-          {isHydrated && (
-            <Suspense>
-              <Model
-                alt={screenshot.alt}
-                cameraPosition={{ x: 0, y: 0, z: 8 }}
-                showDelay={700}
-                onLoad={handleModelLoad}
-                show={visible}
-                models={[
-                  {
-                    ...deviceModels.laptop,
-                    texture: {
-                      src: screenshot.src,
-                      srcSet: screenshot.src,
-                      placeholder: screenshot.src,
-                      sizes: laptopSizes,
-                    },
-                  },
-                ]}
-              />
-            </Suspense>
-          )}
+          <StaticLaptop screenshot={screenshot} />
         </div>
       </div>
     );

@@ -3,7 +3,7 @@
     width: 100%;
     max-width: 800px;
     background-color: transparent;
-    perspective: 1000px;
+    perspective: 1200px;
     margin: 0 auto;
 }
 
@@ -13,6 +13,14 @@
     padding-top: 65%;
     /* Aspect ratio of laptop combined with bottom lip */
     background: transparent;
+    transform-style: preserve-3d;
+    transform: rotateX(15deg) rotateY(-25deg) rotateZ(5deg);
+    filter: drop-shadow(-30px 40px 30px rgba(0, 0, 0, 0.3));
+    transition: transform 0.8s ease;
+}
+
+.laptopChassis:hover {
+    transform: rotateX(10deg) rotateY(-15deg) rotateZ(2deg) scale(1.02);
 }
 
 .laptopScreen {
