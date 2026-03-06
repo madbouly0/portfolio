@@ -27,6 +27,7 @@ export default defineConfig({
     }),
     remix({
       ssr: false,
+      basename: isGitHubPages ? '/portfolio/' : '/',
       routes(defineRoutes) {
         return defineRoutes(route => {
           route('/', 'routes/home/route.js', { index: true });
