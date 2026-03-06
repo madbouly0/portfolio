@@ -492,8 +492,12 @@ const Device = ({
         };
       }
 
+      // Render the model immediately with placeholder texture
+      renderFrame();
+
       return { loadFullResTexture, playAnimation };
     };
+
 
     setLoadDevice({ start: load });
 
@@ -510,6 +514,9 @@ const Device = ({
 
         setLoaded(true);
         onLoad?.();
+
+        // Render immediately so the model is visible before animation delay
+        renderFrame();
 
         if (!reduceMotion && playAnimation) {
           animation = playAnimation();
