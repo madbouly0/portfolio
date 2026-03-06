@@ -35,12 +35,12 @@ export const links = () => [
     type: 'font/woff2',
     crossOrigin: '',
   },
-  { rel: 'manifest', href: '/manifest.json' },
-  { rel: 'icon', href: '/favicon.ico' },
-  { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
-  { rel: 'shortcut_icon', href: '/shortcut.png', type: 'image/png', sizes: '64x64' },
-  { rel: 'apple-touch-icon', href: '/icon-256.png', sizes: '256x256' },
-  { rel: 'author', href: '/humans.txt', type: 'text/plain' },
+  { rel: 'manifest', href: `${import.meta.env.BASE_URL}manifest.json` },
+  { rel: 'icon', href: `${import.meta.env.BASE_URL}favicon.ico` },
+  { rel: 'icon', href: `${import.meta.env.BASE_URL}favicon.svg`, type: 'image/svg+xml' },
+  { rel: 'shortcut_icon', href: `${import.meta.env.BASE_URL}shortcut.png`, type: 'image/png', sizes: '64x64' },
+  { rel: 'apple-touch-icon', href: `${import.meta.env.BASE_URL}icon-256.png`, sizes: '256x256' },
+  { rel: 'author', href: `${import.meta.env.BASE_URL}humans.txt`, type: 'text/plain' },
 ];
 
 /**
@@ -70,15 +70,18 @@ const spaRedirectScript = `
 `;
 
 export default function App() {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.localStorage.getItem('theme') || 'dark';
+    }
+    return 'dark';
+  });
   const { state } = useNavigation();
 
-  // Read theme from localStorage on mount
+  // Ensure body has the theme attribute on mount and updates
   useEffect(() => {
-    const saved = localStorage.getItem('theme') || 'dark';
-    setTheme(saved);
-    document.body.setAttribute('data-theme', saved);
-  }, []);
+    document.body.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const toggleTheme = useCallback(
     (newTheme) => {
@@ -98,7 +101,7 @@ export default function App() {
   }, []);
 
   return (
-    <html lang="en">
+    <html lang="en" data-theme={theme}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -144,7 +147,7 @@ export default function App() {
  */
 export function HydrateFallback() {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -168,7 +171,7 @@ export function ErrorBoundary() {
   const error = useRouteError();
 
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
