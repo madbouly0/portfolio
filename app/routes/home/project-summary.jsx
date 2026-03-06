@@ -1,22 +1,17 @@
 import { Button } from '~/components/button';
 import { Divider } from '~/components/divider';
 import { Heading } from '~/components/heading';
-import { deviceModels } from '~/components/model/device-models';
 import { Section } from '~/components/section';
 import { Text } from '~/components/text';
 import { useTheme } from '~/components/theme-provider';
 import { Transition } from '~/components/transition';
-import { Loader } from '~/components/loader';
 import { useWindowSize } from '~/hooks';
-import { Suspense, lazy, useState } from 'react';
+import { useState } from 'react';
 import { cssProps, media } from '~/utils/style';
-import { useHydrated } from '~/hooks/useHydrated';
 import katakana from './katakana.svg';
 import styles from './project-summary.module.css';
 
-const Model = lazy(() =>
-  import('~/components/model').then(module => ({ default: module.Model }))
-);
+
 
 export function ProjectSummary({
   id,
@@ -25,37 +20,29 @@ export function ProjectSummary({
   index,
   title,
   description,
-  model,
+  screenshot,
   buttonText,
   buttonLink,
   alternate,
   ...rest
 }) {
   const [focused, setFocused] = useState(false);
-  const [modelLoaded, setModelLoaded] = useState(false);
   const { theme } = useTheme();
   const { width } = useWindowSize();
-  const isHydrated = useHydrated();
   const titleId = `${id}-title`;
   const isMobile = width <= media.tablet;
   const svgOpacity = theme === 'light' ? 0.7 : 1;
   const indexText = index < 10 ? `0${index}` : index;
-  const phoneSizes = `(max-width: ${media.tablet}px) 30vw, 20vw`;
-  const laptopSizes = `(max-width: ${media.tablet}px) 80vw, 40vw`;
 
-  function handleModelLoad() {
-    setModelLoaded(true);
-  }
-
-  function renderKatakana(device, visible) {
+  function renderKatakana(visible) {
     return (
       <svg
         type="project"
-        data-visible={visible && modelLoaded}
+        data-visible={visible}
         data-light={theme === 'light'}
         style={cssProps({ opacity: svgOpacity })}
         className={styles.svg}
-        data-device={device}
+        data-device="laptop"
         viewBox="0 0 751 136"
       >
         <use href={`${katakana}#katakana-project`} />
@@ -101,75 +88,17 @@ export function ProjectSummary({
   function renderPreview(visible) {
     return (
       <div className={styles.preview}>
-        {model.type === 'laptop' && (
-          <>
-            {renderKatakana('laptop', visible)}
-            <div className={styles.model} data-device="laptop">
-              {!modelLoaded && (
-                <Loader center className={styles.loader} data-visible={visible} />
-              )}
-              {isHydrated && visible && (
-                <Suspense>
-                  <Model
-                    alt={model.alt}
-                    cameraPosition={{ x: 0, y: 0, z: 8 }}
-                    showDelay={700}
-                    onLoad={handleModelLoad}
-                    show={visible}
-                    models={[
-                      {
-                        ...deviceModels.laptop,
-                        texture: {
-                          ...model.textures[0],
-                          sizes: laptopSizes,
-                        },
-                      },
-                    ]}
-                  />
-                </Suspense>
-              )}
-            </div>
-          </>
-        )}
-        {model.type === 'phone' && (
-          <>
-            {renderKatakana('phone', visible)}
-            <div className={styles.model} data-device="phone">
-              {!modelLoaded && (
-                <Loader center className={styles.loader} data-visible={visible} />
-              )}
-              {isHydrated && visible && (
-                <Suspense>
-                  <Model
-                    alt={model.alt}
-                    cameraPosition={{ x: 0, y: 0, z: 11.5 }}
-                    showDelay={300}
-                    onLoad={handleModelLoad}
-                    show={visible}
-                    models={[
-                      {
-                        ...deviceModels.phone,
-                        position: { x: -0.6, y: 1.1, z: 0 },
-                        texture: {
-                          ...model.textures[0],
-                          sizes: phoneSizes,
-                        },
-                      },
-                      {
-                        ...deviceModels.phone,
-                        position: { x: 0.6, y: -0.5, z: 0.3 },
-                        texture: {
-                          ...model.textures[1],
-                          sizes: phoneSizes,
-                        },
-                      },
-                    ]}
-                  />
-                </Suspense>
-              )}
-            </div>
-          </>
-        )}
+        {renderKatakana(visible)}
+        <div className={styles.screenshotContainer} data-visible={visible}>
+          <img
+            className={styles.screenshot}
+            src={screenshot.src}
+            alt={screenshot.alt}
+            loading="lazy"
+            width="800"
+            height="500"
+          />
+        </div>
       </div>
     );
   }

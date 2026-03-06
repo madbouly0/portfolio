@@ -83,69 +83,35 @@
   height: 100%;
   width: 100%;
   position: relative;
-    left: -60px;
 }
 
-.model {
-  --width: 180%;
-  --aspectRatio: 12 / 10;
-
-  min-width: var(--width);
-  aspect-ratio: var(--aspectRatio);
-  display: grid;
+.screenshotContainer {
   position: relative;
-
-  &[data-device='laptop'] {
-    top: 6%;
-    left: 14%;
-
-    @media (--mediaDesktop) {
-      --width: 180%;
-    }
-
-    @media (--mediaTablet) {
-      --width: 140%;
-
-      top: 10%;
-      left: 0;
-    }
-  }
-
-  &[data-device='phone'] {
-    --width: 116%;
-    --aspectRatio: 7 / 10;
-
-    top: 5%;
-    left: -10%;
-
-    @media (--mediaDesktop) {
-      --width: 108%;
-
-      left: 0;
-    }
-
-    @media (--mediaTablet) {
-      --width: 108%;
-
-      left: 0;
-      max-height: 60vh;
-    }
-
-    @media (--mediaMobile) {
-      --width: 108%;
-
-      left: 0;
-      max-height: none;
-    }
-  }
-}
-
-.loader {
+  width: 100%;
+  max-width: 800px;
   opacity: 0;
-  transition: opacity 400ms ease 1000ms;
+  transform: translate3d(0, var(--spaceXL), 0);
+  transition-property: opacity, transform;
+  transition-duration: var(--durationXL);
+  transition-timing-function: var(--bezierFastoutSlowin);
+  transition-delay: 600ms;
 
   &[data-visible='true'] {
     opacity: 1;
+    transform: none;
+  }
+}
+
+.screenshot {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
+
+  @media (--mediaTablet) {
+    border-radius: 6px;
   }
 }
 
