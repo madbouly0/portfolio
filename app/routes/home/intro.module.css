@@ -38,8 +38,10 @@
   font-size: calc((24 / 16) * 1rem);
   letter-spacing: 0.3em;
   color: var(--textLight);
-  margin-bottom: var(--space2XL);
+  margin-bottom: var(--spaceM);
   margin-top: 0;
+  position: relative;
+  z-index: 10;
   font-weight: var(--fontWeightMedium);
   line-height: 1;
   opacity: 0;
@@ -47,7 +49,7 @@
 
   @media (--mediaLaptop) {
     font-size: calc((22 / 16) * 1rem);
-    margin-bottom: var(--spaceXL);
+    margin-bottom: var(--spaceS);
   }
 
   @media (--mediaTablet) {

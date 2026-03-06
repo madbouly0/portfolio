@@ -1,0 +1,171 @@
+
+> build
+> remix vite:build
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+[7m[33m warn [39m[27m Fetcher persistence behavior is changing in React Router v7
+[33m┃[39m [90mYou can use the `v3_fetcherPersist` future flag to opt-in early.[39m
+[33m┃[39m [90m-> https://remix.run/docs/en/2.13.1/start/future-flags#v3_fetcherPersist[39m
+[33m┗[39m
+[7m[33m warn [39m[27m Route discovery/manifest behavior is changing in React Router v7
+[33m┃[39m [90mYou can use the `v3_lazyRouteDiscovery` future flag to opt-in early.[39m
+[33m┃[39m [90m-> https://remix.run/docs/en/2.13.1/start/future-flags#v3_lazyRouteDiscovery[39m
+[33m┗[39m
+[7m[33m warn [39m[27m Relative routing behavior for splat routes is changing in React Router v7
+[33m┃[39m [90mYou can use the `v3_relativeSplatPath` future flag to opt-in early.[39m
+[33m┃[39m [90m-> https://remix.run/docs/en/2.13.1/start/future-flags#v3_relativeSplatPath[39m
+[33m┗[39m
+[7m[33m warn [39m[27m Data fetching is changing to a single fetch in React Router v7
+[33m┃[39m [90mYou can use the `v3_singleFetch` future flag to opt-in early.[39m
+[33m┃[39m [90m-> https://remix.run/docs/en/2.13.1/start/future-flags#v3_singleFetch[39m
+[33m┗[39m
+[7m[33m warn [39m[27m The format of errors thrown on aborted requests is changing in React Router v7
+[33m┃[39m [90mYou can use the `v3_throwAbortReason` future flag to opt-in early.[39m
+[33m┃[39m [90m-> https://remix.run/docs/en/2.13.1/start/future-flags#v3_throwAbortReason[39m
+[33m┗[39m
+[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32m✓[39m 804 modules transformed.
+[31mx[39m Build failed in 3.59s
+[31mapp/components/model/model.jsx (36:2): "modelLoader" is not exported by "app/utils/three.js", imported by "app/components/model/model.jsx".[39m
+file: [36mC:/Users/ALSAAD/Desktop/portfolio/app/components/model/model.jsx:36:2[39m
+[33m
+34:   cleanRenderer,
+35:   cleanScene,
+36:   modelLoader,
+      ^
+37:   removeLights,
+38:   textureLoader,
+[39m
+    at getRollupError (file:///C:/Users/ALSAAD/Desktop/portfolio/node_modules/vite/node_modules/rollup/dist/es/shared/parseAst.js:402:41)
+    at error (file:///C:/Users/ALSAAD/Desktop/portfolio/node_modules/vite/node_modules/rollup/dist/es/shared/parseAst.js:398:42)
+    at Module.error (file:///C:/Users/ALSAAD/Desktop/portfolio/node_modules/vite/node_modules/rollup/dist/es/shared/node-entry.js:17040:16)
+    at Module.traceVariable (file:///C:/Users/ALSAAD/Desktop/portfolio/node_modules/vite/node_modules/rollup/dist/es/shared/node-entry.js:17452:29)
+    at ModuleScope.findVariable (file:///C:/Users/ALSAAD/Desktop/portfolio/node_modules/vite/node_modules/rollup/dist/es/shared/node-entry.js:15070:39)
+    at ReturnValueScope.findVariable (file:///C:/Users/ALSAAD/Desktop/portfolio/node_modules/vite/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at FunctionBodyScope.findVariable (file:///C:/Users/ALSAAD/Desktop/portfolio/node_modules/vite/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at ReturnValueScope.findVariable (file:///C:/Users/ALSAAD/Desktop/portfolio/node_modules/vite/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at FunctionBodyScope.findVariable (file:///C:/Users/ALSAAD/Desktop/portfolio/node_modules/vite/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at ReturnValueScope.findVariable (file:///C:/Users/ALSAAD/Desktop/portfolio/node_modules/vite/node_modules/rollup/dist/es/shared/node-entry.js:5673:38) {
+  binding: 'modelLoader',
+  code: 'MISSING_EXPORT',
+  exporter: 'C:/Users/ALSAAD/Desktop/portfolio/app/utils/three.js',
+  id: 'C:/Users/ALSAAD/Desktop/portfolio/app/components/model/model.jsx',
+  url: 'https://rollupjs.org/troubleshooting/#error-name-is-not-exported-by-module',
+  pos: 788,
+  loc: {
+    column: 2,
+    file: 'C:/Users/ALSAAD/Desktop/portfolio/app/components/model/model.jsx',
+    line: 36
+  },
+  frame: '34:   cleanRenderer,\r\n' +
+    '35:   cleanScene,\r\n' +
+    '36:   modelLoader,\r\n' +
+    '      ^\n' +
+    '37:   removeLights,\r\n' +
+    '38:   textureLoader,\r',
+  watchFiles: [
+    'C:/Users/ALSAAD/Desktop/portfolio/app/root.jsx',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/dev/dist/config/defaults/entry.client.tsx',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/articles.modern-styling-in-react.mdx',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/home/route.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/articles.hello-world.mdx',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/contact/route.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/uses/route.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/$.jsx',
+    'C:\\Users\\ALSAAD\\Desktop\\portfolio\\package.json',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/index.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/react-dom/client.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/react/jsx-runtime.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/react/index.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/browser.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/components.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/react-router-dom/dist/index.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/scroll-restoration.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/server.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/index.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/home/home.jsx',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/contact/contact.jsx',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/react-dom/index.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/uses/uses.jsx',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/react/cjs/react.production.min.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/react/cjs/react-jsx-runtime.production.min.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/_virtual/_rollupPluginBabelHelpers.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/markup.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/errorBoundaries.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/react-router-dom/server.mjs',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/cookies.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/single-fetch.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/routes.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/responses.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/single-fetch.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/formData.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/sessions.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/sessions/memoryStorage.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/upload/memoryUploadHandler.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/dev.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/upload/errors.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/sessions/cookieStorage.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/server.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/invariant.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/errors.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/fog-of-war.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/react-router/dist/index.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/router/dist/router.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/react-dom/cjs/react-dom.production.min.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/uses/uses.module.css',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/global.module.css',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/home/intro.jsx',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/home/home.module.css',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/home/project-summary.jsx',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/home/profile.jsx',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/contact/contact.module.css',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/links.js',
+    'app/assets/uses-background-placeholder.jpg',
+    'app/assets/my_project_screenshot.png',
+    'app/assets/my_project_screenshot3.png',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/config.json',
+    'app/assets/my_project_screenshot2.png',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/warnings.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/cookie/index.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/turbo-stream/dist/turbo-stream.mjs',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/data.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/routeModules.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/react/dist/esm/fallback.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/errors.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/mode.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/headers.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@web3-storage/multipart-parser/esm/src/index.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/actions.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/serverHandoff.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/entry.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/invariant.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/routeMatching.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/routes.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/deprecations.js',
+    'app/assets/uses-background.mp4',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/scheduler/index.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/utils/meta.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/components/theme-provider/theme.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/utils/style.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/set-cookie-parser/lib/set-cookie.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@web3-storage/multipart-parser/esm/src/search.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@web3-storage/multipart-parser/esm/src/utils.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/markup.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/@remix-run/server-runtime/dist/esm/data.js',
+    'app/routes/home/katakana.svg',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/home/profile.module.css',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/home/project-summary.module.css',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/home/intro.module.css',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/routes/home/displacement-sphere.jsx',
+    'app/assets/profile-placeholder.jpg',
+    'app/assets/profile-large.jpg',
+    'app/assets/profile.jpg',
+    'C:/Users/ALSAAD/Desktop/portfolio/node_modules/scheduler/cjs/scheduler.production.min.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/components/link/index.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/components/table/index.js',
+    'C:/Users/ALSAAD/Desktop/portfolio/app/components/list/index.js',
+    ... 678 more items
+  ],
+  Symbol(augmented): true
+}

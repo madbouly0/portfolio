@@ -24,7 +24,7 @@ export function ProjectSummary({
   index,
   title,
   description,
-  screenshot,
+  model,
   buttonText,
   buttonLink,
   alternate,
@@ -39,6 +39,7 @@ export function ProjectSummary({
   const isMobile = width <= media.tablet;
   const svgOpacity = theme === 'light' ? 0.7 : 1;
   const indexText = index < 10 ? `0${index}` : index;
+  const phoneSizes = `(max-width: ${media.tablet}px) 30vw, 20vw`;
   const laptopSizes = `(max-width: ${media.tablet}px) 80vw, 40vw`;
 
   function handleModelLoad() {
@@ -99,31 +100,69 @@ export function ProjectSummary({
   function renderPreview(visible) {
     return (
       <div className={styles.preview}>
-        {renderKatakana('laptop', visible)}
-        <div className={styles.model} data-device="laptop">
-          {isHydrated && (
-            <Suspense>
-              <Model
-                alt={screenshot.alt}
-                cameraPosition={{ x: 0, y: 0, z: 8 }}
-                showDelay={700}
-                onLoad={handleModelLoad}
-                show={visible}
-                models={[
-                  {
-                    ...deviceModels.laptop,
-                    texture: {
-                      src: screenshot.src,
-                      srcSet: screenshot.src,
-                      placeholder: screenshot.src,
-                      sizes: laptopSizes,
-                    },
-                  },
-                ]}
-              />
-            </Suspense>
-          )}
-        </div>
+        {model.type === 'laptop' && (
+          <>
+            {renderKatakana('laptop', visible)}
+            <div className={styles.model} data-device="laptop">
+              {isHydrated && (
+                <Suspense>
+                  <Model
+                    alt={model.alt}
+                    cameraPosition={{ x: 0, y: 0, z: 8 }}
+                    showDelay={700}
+                    onLoad={handleModelLoad}
+                    show={visible}
+                    models={[
+                      {
+                        ...deviceModels.laptop,
+                        texture: {
+                          ...model.textures[0],
+                          sizes: laptopSizes,
+                        },
+                      },
+                    ]}
+                  />
+                </Suspense>
+              )}
+            </div>
+          </>
+        )}
+        {model.type === 'phone' && (
+          <>
+            {renderKatakana('phone', visible)}
+            <div className={styles.model} data-device="phone">
+              {isHydrated && (
+                <Suspense>
+                  <Model
+                    alt={model.alt}
+                    cameraPosition={{ x: 0, y: 0, z: 11.5 }}
+                    showDelay={300}
+                    onLoad={handleModelLoad}
+                    show={visible}
+                    models={[
+                      {
+                        ...deviceModels.phone,
+                        position: { x: -0.6, y: 1.1, z: 0 },
+                        texture: {
+                          ...model.textures[0],
+                          sizes: phoneSizes,
+                        },
+                      },
+                      {
+                        ...deviceModels.phone,
+                        position: { x: 0.6, y: -0.5, z: 0.3 },
+                        texture: {
+                          ...model.textures[1],
+                          sizes: phoneSizes,
+                        },
+                      },
+                    ]}
+                  />
+                </Suspense>
+              )}
+            </div>
+          </>
+        )}
       </div>
     );
   }
