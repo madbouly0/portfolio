@@ -13,6 +13,7 @@ export const ThemeContext = createContext({});
 
 export const ThemeProvider = ({
   theme = 'dark',
+  toggleTheme,
   children,
   className,
   as: Component = 'div',
@@ -25,6 +26,7 @@ export const ThemeProvider = ({
     <ThemeContext.Provider
       value={{
         theme,
+        toggleTheme,
       }}
     >
       {isRootProvider && children}

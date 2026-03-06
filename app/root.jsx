@@ -10,7 +10,7 @@ import {
 import { ThemeProvider, themeStyles } from '~/components/theme-provider';
 import GothamBook from '~/assets/fonts/gotham-book.woff2';
 import GothamMedium from '~/assets/fonts/gotham-medium.woff2';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Error } from '~/layouts/error';
 import { VisuallyHidden } from '~/components/visually-hidden';
 import { Navbar } from '~/layouts/navbar';
@@ -57,8 +57,33 @@ const spaRedirectScript = `
   })();
 `;
 
+const themeScript = `
+  (function() {
+    try {
+      var theme = localStorage.getItem('theme');
+      if (!theme) return;
+      document.documentElement.dataset.theme = theme;
+      document.body.dataset.theme = theme;
+    } catch (e) {}
+  })();
+`;
+
 export default function App() {
+  const [theme, setTheme] = useState('dark');
   const { state } = useNavigation();
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+      setTheme(storedTheme);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
 
   useEffect(() => {
     console.info(
@@ -68,19 +93,20 @@ export default function App() {
   }, []);
 
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en" data-theme={theme || 'dark'}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#111" />
-        <meta name="color-scheme" content="dark" />
+        <meta name="theme-color" content={theme === 'dark' ? '#111' : '#F2F2F2'} />
+        <meta name="color-scheme" content={theme || 'dark'} />
         <style dangerouslySetInnerHTML={{ __html: themeStyles }} />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script dangerouslySetInnerHTML={{ __html: spaRedirectScript }} />
         <Meta />
         <Links />
       </head>
-      <body data-theme="dark">
-        <ThemeProvider theme="dark">
+      <body data-theme={theme || 'dark'}>
+        <ThemeProvider theme={theme} toggleTheme={toggleTheme}>
           <Progress />
           <VisuallyHidden showOnFocus as="a" className={styles.skip} href="#main-content">
             Skip to main content
@@ -116,6 +142,7 @@ export function HydrateFallback() {
         <meta name="theme-color" content="#111" />
         <meta name="color-scheme" content="dark" />
         <style dangerouslySetInnerHTML={{ __html: themeStyles }} />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script dangerouslySetInnerHTML={{ __html: spaRedirectScript }} />
         <Meta />
         <Links />
@@ -139,6 +166,7 @@ export function ErrorBoundary() {
         <meta name="theme-color" content="#111" />
         <meta name="color-scheme" content="dark" />
         <style dangerouslySetInnerHTML={{ __html: themeStyles }} />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <Meta />
         <Links />
       </head>
