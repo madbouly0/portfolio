@@ -10,12 +10,10 @@ import { Text } from '~/components/text';
 import { tokens } from '~/components/theme-provider/theme';
 import { Transition } from '~/components/transition';
 import { useFormInput } from '~/hooks';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { cssProps, msToNum, numToMs } from '~/utils/style';
 import { baseMeta } from '~/utils/meta';
-import { Form, useActionData, useNavigation } from '@remix-run/react';
-import { json } from '@remix-run/cloudflare';
-import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
+import { Form } from '@remix-run/react';
 import styles from './contact.module.css';
 
 export const meta = () => {
@@ -30,77 +28,82 @@ const MAX_EMAIL_LENGTH = 512;
 const MAX_MESSAGE_LENGTH = 4096;
 const EMAIL_PATTERN = /(.+)@(.+){2,}\.(.+){2,}/;
 
-export async function action({ context, request }) {
-  const ses = new SESClient({
-    region: 'us-east-1',
-    credentials: {
-      accessKeyId: context.cloudflare.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: context.cloudflare.env.AWS_SECRET_ACCESS_KEY,
-    },
-  });
-
-  const formData = await request.formData();
-  const isBot = String(formData.get('name'));
-  const email = String(formData.get('email'));
-  const message = String(formData.get('message'));
-  const errors = {};
-
-  // Return without sending if a bot trips the honeypot
-  if (isBot) return json({ success: true });
-
-  // Handle input validation on the server
-  if (!email || !EMAIL_PATTERN.test(email)) {
-    errors.email = 'Please enter a valid email address.';
-  }
-
-  if (!message) {
-    errors.message = 'Please enter a message.';
-  }
-
-  if (email.length > MAX_EMAIL_LENGTH) {
-    errors.email = `Email address must be shorter than ${MAX_EMAIL_LENGTH} characters.`;
-  }
-
-  if (message.length > MAX_MESSAGE_LENGTH) {
-    errors.message = `Message must be shorter than ${MAX_MESSAGE_LENGTH} characters.`;
-  }
-
-  if (Object.keys(errors).length > 0) {
-    return json({ errors });
-  }
-
-  // Send email via Amazon SES
-  await ses.send(
-    new SendEmailCommand({
-      Destination: {
-        ToAddresses: [context.cloudflare.env.EMAIL],
-      },
-      Message: {
-        Body: {
-          Text: {
-            Data: `From: ${email}\n\n${message}`,
-          },
-        },
-        Subject: {
-          Data: `Portfolio message from ${email}`,
-        },
-      },
-      Source: `Portfolio <${context.cloudflare.env.FROM_EMAIL}>`,
-      ReplyToAddresses: [email],
-    })
-  );
-
-  return json({ success: true });
-}
-
 export const Contact = () => {
   const errorRef = useRef();
   const email = useFormInput('');
   const message = useFormInput('');
   const initDelay = tokens.base.durationS;
-  const actionData = useActionData();
-  const { state } = useNavigation();
-  const sending = state === 'submitting';
+  const [actionData, setActionData] = useState(null);
+  const [sending, setSending] = useState(false);
+
+  const onSubmit = async event => {
+    event.preventDefault();
+    setSending(true);
+    setActionData(null);
+
+    const formData = new FormData(event.target);
+    const isBot = String(formData.get('name'));
+    const emailValue = String(formData.get('email'));
+    const messageValue = String(formData.get('message'));
+    const errors = {};
+
+    // Return without sending if a bot trips the honeypot
+    if (isBot) {
+      setSending(false);
+      setActionData({ success: true });
+      return;
+    }
+
+    // Handle input validation
+    if (!emailValue || !EMAIL_PATTERN.test(emailValue)) {
+      errors.email = 'Please enter a valid email address.';
+    }
+
+    if (!messageValue) {
+      errors.message = 'Please enter a message.';
+    }
+
+    if (emailValue.length > MAX_EMAIL_LENGTH) {
+      errors.email = `Email address must be shorter than ${MAX_EMAIL_LENGTH} characters.`;
+    }
+
+    if (messageValue.length > MAX_MESSAGE_LENGTH) {
+      errors.message = `Message must be shorter than ${MAX_MESSAGE_LENGTH} characters.`;
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setSending(false);
+      setActionData({ errors });
+      return;
+    }
+
+    try {
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        setActionData({ success: true });
+      } else {
+        const result = await response.json();
+        setActionData({
+          errors: Object.fromEntries(
+            result?.errors?.map(error => [error.field, error.message]) ?? []
+          ),
+        });
+      }
+    } catch (error) {
+      setActionData({
+        errors: { message: 'There was a problem sending your message. Please try again.' },
+      });
+    }
+
+    setSending(false);
+  };
 
   return (
     <Section className={styles.contact}>
@@ -110,6 +113,7 @@ export const Contact = () => {
             unstable_viewTransition
             className={styles.form}
             method="post"
+            onSubmit={onSubmit}
             ref={nodeRef}
           >
             <Heading
