@@ -33,6 +33,7 @@ import { classes, cssProps, numToMs } from '~/utils/style';
 import {
   cleanRenderer,
   cleanScene,
+  getChild,
   modelLoader,
   removeLights,
   textureLoader,
@@ -193,9 +194,9 @@ export const Model = ({
       shader.fragmentShader = `
         uniform float darkness;
         ${shader.fragmentShader.replace(
-          'gl_FragColor = vec4( vec3( 1.0 - fragCoordZ ), opacity );',
-          'gl_FragColor = vec4( vec3( 0.0 ), ( 1.0 - fragCoordZ ) * darkness );'
-        )}
+        'gl_FragColor = vec4( vec3( 1.0 - fragCoordZ ), opacity );',
+        'gl_FragColor = vec4( vec3( 0.0 ), ( 1.0 - fragCoordZ ) * darkness );'
+      )}
       `;
     };
     depthMaterial.current.depthTest = false;
@@ -390,42 +391,46 @@ const Device = ({
       let playAnimation;
 
       const [placeholder, gltf] = await Promise.all([
-        await textureLoader.loadAsync(texture.placeholder),
-        await modelLoader.loadAsync(url),
+        textureLoader.loadAsync(texture.placeholder),
+        modelLoader.loadAsync(url),
       ]);
 
       modelGroup.current.add(gltf.scene);
 
-      gltf.scene.traverse(async node => {
+      // Set dark base color on all meshes
+      gltf.scene.traverse(node => {
         if (node.material) {
           node.material.color = new Color(0x1f2025);
         }
-
-        if (node.name === MeshType.Screen) {
-          // Create a copy of the screen mesh so we can fade it out
-          // over the full resolution screen texture
-          placeholderScreen.current = node.clone();
-          placeholderScreen.current.material = node.material.clone();
-          node.parent.add(placeholderScreen.current);
-          placeholderScreen.current.material.opacity = 1;
-          placeholderScreen.current.position.z += 0.001;
-
-          applyScreenTexture(placeholder, placeholderScreen.current);
-
-          loadFullResTexture = async () => {
-            const image = await resolveSrcFromSrcSet(texture);
-            const fullSize = await textureLoader.loadAsync(image);
-            await applyScreenTexture(fullSize, node);
-
-            animate(1, 0, {
-              onUpdate: value => {
-                placeholderScreen.current.material.opacity = value;
-                renderFrame();
-              },
-            });
-          };
-        }
       });
+
+      // Find the screen node deterministically (not inside async traverse)
+      const screenNode = getChild(MeshType.Screen, gltf.scene);
+
+      if (screenNode) {
+        // Create a copy of the screen mesh so we can fade it out
+        // over the full resolution screen texture
+        placeholderScreen.current = screenNode.clone();
+        placeholderScreen.current.material = screenNode.material.clone();
+        screenNode.parent.add(placeholderScreen.current);
+        placeholderScreen.current.material.opacity = 1;
+        placeholderScreen.current.position.z += 0.001;
+
+        await applyScreenTexture(placeholder, placeholderScreen.current);
+
+        loadFullResTexture = async () => {
+          const image = await resolveSrcFromSrcSet(texture);
+          const fullSize = await textureLoader.loadAsync(image);
+          await applyScreenTexture(fullSize, screenNode);
+
+          animate(1, 0, {
+            onUpdate: value => {
+              placeholderScreen.current.material.opacity = value;
+              renderFrame();
+            },
+          });
+        };
+      }
 
       const targetPosition = new Vector3(position.x, position.y, position.z);
 
@@ -500,19 +505,27 @@ const Device = ({
     let animation;
 
     const onModelLoad = async () => {
-      const { loadFullResTexture, playAnimation } = await loadDevice.start();
+      try {
+        const { loadFullResTexture, playAnimation } = await loadDevice.start();
 
-      setLoaded(true);
-      onLoad?.();
+        setLoaded(true);
+        onLoad?.();
 
-      if (!reduceMotion) {
-        animation = playAnimation();
-      }
+        if (!reduceMotion && playAnimation) {
+          animation = playAnimation();
+        }
 
-      await loadFullResTexture();
+        if (loadFullResTexture) {
+          await loadFullResTexture();
+        }
 
-      if (reduceMotion) {
-        renderFrame();
+        if (reduceMotion) {
+          renderFrame();
+        }
+      } catch (error) {
+        console.error('Error loading 3D model:', error);
+        setLoaded(true);
+        onLoad?.();
       }
     };
 
