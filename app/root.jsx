@@ -68,19 +68,19 @@ export default function App() {
   }, []);
 
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" data-theme="dark">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#F2F2F2" />
-        <meta name="color-scheme" content="light" />
+        <meta name="theme-color" content="#111" />
+        <meta name="color-scheme" content="dark" />
         <style dangerouslySetInnerHTML={{ __html: themeStyles }} />
         <script dangerouslySetInnerHTML={{ __html: spaRedirectScript }} />
         <Meta />
         <Links />
       </head>
-      <body data-theme="light">
-        <ThemeProvider theme="light">
+      <body data-theme="dark">
+        <ThemeProvider theme="dark">
           <Progress />
           <VisuallyHidden showOnFocus as="a" className={styles.skip} href="#main-content">
             Skip to main content
@@ -109,18 +109,18 @@ export default function App() {
  */
 export function HydrateFallback() {
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" data-theme="dark">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#F2F2F2" />
-        <meta name="color-scheme" content="light" />
+        <meta name="theme-color" content="#111" />
+        <meta name="color-scheme" content="dark" />
         <style dangerouslySetInnerHTML={{ __html: themeStyles }} />
         <script dangerouslySetInnerHTML={{ __html: spaRedirectScript }} />
         <Meta />
         <Links />
       </head>
-      <body data-theme="light">
+      <body data-theme="dark">
         {/* Intentionally blank — shows briefly while JS loads */}
         <Scripts />
       </body>
@@ -132,17 +132,17 @@ export function ErrorBoundary() {
   const error = useRouteError();
 
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" data-theme="dark">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#F2F2F2" />
-        <meta name="color-scheme" content="light" />
+        <meta name="theme-color" content="#111" />
+        <meta name="color-scheme" content="dark" />
         <style dangerouslySetInnerHTML={{ __html: themeStyles }} />
         <Meta />
         <Links />
       </head>
-      <body data-theme="light">
+      <body data-theme="dark">
         <Error error={error} />
         <ScrollRestoration />
         <Scripts />

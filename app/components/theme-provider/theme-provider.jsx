@@ -12,7 +12,7 @@ import { themes, tokens } from './theme';
 export const ThemeContext = createContext({});
 
 export const ThemeProvider = ({
-  theme = 'light',
+  theme = 'dark',
   children,
   className,
   as: Component = 'div',
