@@ -12,7 +12,7 @@ const isGitHubPages = process.env.GITHUB_PAGES === 'true';
 
 export default defineConfig({
   assetsInclude: ['**/*.glb', '**/*.hdr', '**/*.glsl'],
-  base: isGitHubPages ? '/New-folder/' : '/',
+  base: isGitHubPages ? '/portfolio/' : '/',
   build: {
     assetsInlineLimit: 1024,
   },
