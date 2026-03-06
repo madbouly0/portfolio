@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <!-- 
+      GitHub Pages doesn't support SPA routing. 
+      This hack redirects 404s back to index.html with the path encoded. 
+      root.jsx has a script that decodes this and restores the URL.
+    -->
+    <script>
+      const path = window.location.pathname;
+      window.location.replace('/New-folder/?p=' + encodeURIComponent(path));
+    </script>
+  </head>
+  <body></body>
+</html>
