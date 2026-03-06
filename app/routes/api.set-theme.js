@@ -20,7 +20,7 @@ export async function action({ request, context }) {
   session.set('theme', theme);
 
   return json(
-    { status: 'success' },
+    { status: 'success', theme },
     {
       headers: {
         'Set-Cookie': await commitSession(session),

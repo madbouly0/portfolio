@@ -82,9 +82,8 @@ export default function App() {
   const fetcher = useFetcher();
   const { state } = useNavigation();
 
-  if (fetcher.formData?.has('theme')) {
-    theme = fetcher.formData.get('theme');
-  }
+  // Priority: action response > optimistic formData > server loader
+  theme = fetcher.data?.theme ?? (fetcher.formData?.has('theme') ? fetcher.formData.get('theme') : null) ?? theme;
 
   function toggleTheme(newTheme) {
     fetcher.submit(
