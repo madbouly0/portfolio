@@ -1,4 +1,4 @@
-import{r as ct,j as rs}from"./jsx-runtime-BfF-YriY.js";import{u as Mo,b as So}from"./image-Ru5JXRs-.js";import{u as Eo,m as ss,T as yo}from"./heading-EZs7gulK.js";import{u as To}from"./useWindowSize-CJLynbtu.js";import{u as as}from"./decoder-text-DuMob0fp.js";import"./components-D38sqgbT.js";/**
+import{r as ct,j as rs}from"./jsx-runtime-BfF-YriY.js";import{u as Mo,b as So}from"./image-Ru5JXRs-.js";import{u as Eo,m as ss,T as yo}from"./heading-EZs7gulK.js";import{u as To}from"./useWindowSize-3HDlVmKU.js";import{u as as}from"./decoder-text-DuMob0fp.js";import"./components-D38sqgbT.js";/**
  * @license
  * Copyright 2010-2023 Three.js Authors
  * SPDX-License-Identifier: MIT
