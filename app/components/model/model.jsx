@@ -96,7 +96,7 @@ export const Model = ({
       alpha: true,
       antialias: false,
       powerPreference: 'high-performance',
-      failIfMajorPerformanceCaveat: true,
+      failIfMajorPerformanceCaveat: false,
     });
 
     renderer.current.setPixelRatio(2);
