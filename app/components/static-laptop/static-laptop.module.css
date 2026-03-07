@@ -15,4 +15,12 @@
     /* Scale up the image to visually eliminate the thick transparent padding inside the PNG */
     transform: scale(1.45);
     transform-origin: center center;
+
+    @media (--mediaTablet) {
+        transform: scale(1.1);
+        /* Subtle scale for mobile */
+        max-width: 100%;
+        margin-top: var(--space2XL);
+        /* Push laptop away from button */
+    }
 }

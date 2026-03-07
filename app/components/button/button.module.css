@@ -33,13 +33,11 @@
       position: absolute;
       inset: 0;
       z-index: -1;
-      clip-path: polygon(
-        0 0,
-        100% 0,
-        100% calc(100% - 8px),
-        calc(100% - 8px) 100%,
-        0 100%
-      );
+      clip-path: polygon(0 0,
+          100% 0,
+          100% calc(100% - 8px),
+          calc(100% - 8px) 100%,
+          0 100%);
     }
 
     @media (--mediaUseMotion) {
@@ -52,6 +50,14 @@
       &:active {
         transform: scale(1);
       }
+    }
+
+    @media (--mediaMobile) {
+      max-width: 100%;
+      word-break: break-word;
+      white-space: normal;
+      --buttonPadding: 0 var(--spaceM);
+      --buttonFontSize: calc((16 / 16) * 1rem);
     }
 
     &[data-secondary='true'] {
