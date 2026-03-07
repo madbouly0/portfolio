@@ -33,7 +33,8 @@
 }
 
 .content {
-  --textColumnWidth: 36%;
+  --textColumnWidth: 25%;
+  /* Laptop gets 75% width */
 
   width: 100%;
   max-width: var(--maxWidthL);
@@ -48,7 +49,8 @@
   }
 
   @media (--mediaLaptop) {
-    --textColumnWidth: 40%;
+    --textColumnWidth: 30%;
+    /* Laptop gets 70% width */
   }
 
   @media (--mediaTablet) {

@@ -98,7 +98,7 @@ export function ProjectSummary({
       <div className={styles.preview}>
         {renderKatakana('laptop', visible)}
         <div className={styles.model} data-device="laptop">
-          <StaticLaptop screenshot={screenshot} />
+          <StaticLaptop index={index} />
         </div>
       </div>
     );

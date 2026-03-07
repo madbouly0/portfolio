@@ -1,23 +1,18 @@
 import { classes } from '~/utils/style';
 import styles from './static-laptop.module.css';
 
-export const StaticLaptop = ({ screenshot, className }) => {
+export const StaticLaptop = ({ index, className }) => {
+    // Fallback to 1 if index doesn't exactly map to an existing file to prevent broken images
+    const mockupIndex = [1, 2, 3].includes(index) ? index : 1;
+
     return (
         <div className={classes(styles.laptopWrapper, className)}>
-            <div className={styles.laptopChassis}>
-                <div className={styles.laptopScreen}>
-                    <div className={styles.camera} />
-                    <img
-                        src={screenshot?.src || screenshot}
-                        alt={screenshot?.alt || 'Project screenshot'}
-                        className={styles.laptopScreenImage}
-                        loading="lazy"
-                    />
-                </div>
-                <div className={styles.laptopBase}>
-                    <div className={styles.laptopTrackpad} />
-                </div>
-            </div>
+            <img
+                src={`/laptop-mockup-project${mockupIndex}.png`}
+                alt="Project Mockup"
+                className={styles.laptopImage}
+                loading="lazy"
+            />
         </div>
     );
 };
