@@ -1,15 +1,21 @@
 import { classes } from '~/utils/style';
 import styles from './static-laptop.module.css';
 
+import mockup1 from './laptop-mockup-project1.png';
+import mockup2 from './laptop-mockup-project2.png';
+import mockup3 from './laptop-mockup-project3.png';
+
 export const StaticLaptop = ({ index, className }) => {
-    // Fallback to 1 if index doesn't exactly map to an existing file to prevent broken images
-    const mockupIndex = [1, 2, 3].includes(index) ? index : 1;
+    // Map index to the statically imported asset so Vite processes the URL correctly
+    let src = mockup1;
+    if (index === 2) src = mockup2;
+    if (index === 3) src = mockup3;
 
     return (
         <div className={classes(styles.laptopWrapper, className)}>
             <img
-                src={`/laptop-mockup-project${mockupIndex}.png`}
-                alt="Project Mockup"
+                src={src}
+                alt={`Project ${index} Mockup`}
                 className={styles.laptopImage}
                 loading="lazy"
             />
